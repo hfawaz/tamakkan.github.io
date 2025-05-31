@@ -5,18 +5,135 @@
   <title>AI Tutoring in Riyadh</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; color:#333; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      margin:0;
+      padding:0;
+      color:#333;
+      line-height: 1.6; /* Improved readability */
+    }
     header { background:#005f99; color:#fff; padding:1rem; text-align:center; }
-    nav a { color:#fff; margin:0 1rem; text-decoration:none; font-weight:bold; }
+    nav a { color:#fff; margin:0 0.75rem; text-decoration:none; font-weight:bold; display: inline-block; padding: 0.5rem 0; }
     .container { max-width:800px; margin:2rem auto; padding:0 1rem; }
     .hero { text-align:center; padding:2rem 0; }
     .hero h1 { margin:0.5rem 0; }
     .section { margin-bottom:2rem; }
     .cards { display:flex; flex-wrap:wrap; gap:1rem; }
-    .card { border:1px solid #ddd; border-radius:8px; flex:1 1 250px; padding:1rem; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
-    .card h3 { margin-top:0; }
+    .card {
+      border:1px solid #ddd;
+      border-radius:12px; /* Slightly more rounded */
+      flex: 1 1 220px; /* Adjusted flex-basis to make cards slightly smaller */
+      min-width: 200px; /* Prevent cards from becoming too narrow before wrapping */
+      padding:1.5rem; /* More padding */
+      box-shadow:0 2px 4px rgba(0,0,0,0.1);
+      cursor: pointer; /* Indicate interactivity */
+      box-sizing: border-box; /* Ensures padding and border are included in the flex-basis */
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out; /* Smooth transitions */
+      display: flex; /* For flex column layout */
+      flex-direction: column; /* Arrange content vertically */
+      background-color: #fff; /* Explicit background */
+      position: relative; /* For badge positioning */
+    }
+    .card:hover {
+      transform: translateY(-3px); /* Slight lift on hover */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+    }
+    .card.selected {
+      border-color: #005f99;
+      box-shadow: 0 8px 16px rgba(0, 95, 153, 0.3); /* More prominent shadow */
+      transform: translateY(-5px); /* Lift selected card more */
+      background-color: #f0f8ff; /* Light blue background for selected */
+    }
+    .card-icon {
+      display: inline-block;
+      margin-right: 0.5em;
+    }
+    .card h3 { margin-top:0; font-size: 1.25em; }
+    .card .features {
+      list-style: none;
+      padding-left: 0;
+      margin: 1rem 0;
+      flex-grow: 1; /* Allows features to take up space, pushing price/button down */
+    }
+    .card .features li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0.6em;
+      line-height: 1.5;
+    }
+    .card .features li::before {
+      content: '✔';
+      color: #28a745; /* Green checkmark */
+      margin-right: 0.75em;
+      font-weight: bold;
+    }
+    .card .price-section {
+      margin: 1rem 0;
+      text-align: left; /* Align to left, or center if preferred */
+    }
+    .card .price-value {
+      font-size: 2em;
+      font-weight: bold;
+      color: #005f99;
+    }
+    .card .cta-button {
+      display: block; width: 100%; padding: 0.75rem 1rem; background-color:#005f99; color:white; border:none; border-radius:6px; text-align:center; text-decoration:none; font-size:1em; cursor:pointer; margin-top:auto; /* Pushes button to bottom */
+      transition: background-color 0.2s ease-in-out;
+    }
+    .card:hover .cta-button { background-color: #004c80; }
+    .card.selected .cta-button { background-color: #28a745; /* Green for selected plan button */ }
+    .card .badge {
+      position: absolute;
+      top: -12px; /* Position above the card */
+      right: 20px;
+      background-color: #ff9800; /* Orange badge */
+      color: white;
+      padding: 0.4em 0.8em;
+      font-size: 0.85em;
+      border-radius: 4px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
     footer { background:#f0f0f0; text-align:center; padding:1rem; font-size:0.9rem; }
     a.external { color:#005f99; text-decoration:none; }
+    .bio-entry {
+      display: flex;
+      align-items: flex-start; /* Align items to the top */
+      gap: 1.5rem; /* Space between image and text */
+      margin-bottom: 1.5rem;
+    }
+    .bio-entry img {
+      width: 120px; /* Adjust as needed */
+      height: 120px; /* Adjust as needed */
+      border-radius: 50%; /* Circular image */
+      object-fit: cover; /* Ensures image covers the area without distortion */
+      border: 3px solid #005f99; /* Optional: themed border */
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2em; }
+      .hero p { font-size: 1em; }
+      .card h3 { font-size: 1.15em; }
+      .card .price-value { font-size: 1.8em; }
+    }
+
+    @media (max-width: 480px) { /* Smaller mobiles for bio */
+      .bio-entry { flex-direction: column; align-items: center; text-align: center; }
+      .bio-entry img { margin-bottom: 1rem; }
+    }
+
+    @media (max-width: 600px) {
+      header nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      nav a { margin: 0.4rem 0; }
+      .hero h1 { font-size: 1.8em; }
+      .hero p { font-size: 0.95em; }
+      /* Cards will naturally stack due to flex-basis and container width, no specific card width change needed here unless desired for them to be 100% strictly. */
+    }
   </style>
 </head>
 <body>
@@ -24,6 +141,7 @@
   <!-- Header + Navigation -->
   <header>
     <nav>
+      <a href="#tamkeen">Tamkeen</a>
       <a href="#about">About</a>
       <a href="#packages">Packages</a>
       <a href="#contact">Contact</a>
@@ -38,18 +156,40 @@
     </div>
   </section>
 
+  <!-- Tamkeen Introduction -->
+  <section id="tamkeen" class="section">
+    <div class="container">
+      <h2>About Tamkeen</h2>
+      <p>
+        Tamkeen is a visionary organization dedicated to empowering individuals and businesses in Riyadh and beyond through transformative AI education and resources. Our mission is to foster a deeper understanding of Artificial Intelligence and its applications, enabling people to harness the power of AI for innovation, growth, and societal advancement. We believe in making AI accessible to all, providing cutting-edge knowledge and practical skills to navigate the future of technology.
+      </p>
+      <!-- You could add a logo or a link to Tamkeen's website here if available -->
+    </div>
+  </section>
+
   <!-- About -->
   <section id="about" class="section">
     <div class="container">
       <h2>About Us</h2>
-      <p>
-        <strong>Hassan Fawaz</strong> – Data Scientist specializing in Large Language Models.  
-        Portfolio: <a href="https://hfawaz.github.io/" class="external" target="_blank">hfawaz.github.io</a>
-      </p>
-      <p>
-        <strong>Reema Hajou</strong> – Machine Learning enthusiast & educator.  
-        LinkedIn: <a href="https://www.linkedin.com/in/rhajou/" class="external" target="_blank">linkedin.com/in/rhajou</a>
-      </p>
+      <div class="bio-entry">
+        <img src="hassan.png" alt="Hassan Ismail Fawaz">
+        <div>
+          <h3>Hassan Ismail Fawaz, PhD</h3>
+          <p> 
+            Hassan is an accomplished researcher and educator in Artificial Intelligence, holding a PhD from France with a specialization in Large Language Models (LLMs). His work often explores the frontiers of natural language processing, deep learning, and explainable AI. With a passion for demystifying complex AI concepts, Hassan is dedicated to empowering professionals and aspiring data scientists with the practical skills and theoretical understanding needed to innovate and excel in the rapidly evolving field of AI. He has contributed to several impactful projects and publications, aiming to bridge the gap between cutting-edge research and real-world applications.
+          </p>
+          <p>Portfolio: <a href="https://hfawaz.github.io/" class="external" target="_blank">hfawaz.github.io</a></p>
+        </div>
+      </div>
+
+      <div class="bio-entry">
+        <img src="rima.jpg" alt="Rima Hajou">
+        <div>
+          <h3>Rima Hajou, Master of Engineering</h3>
+          <p>Rima holds a Master of Engineering degree from France and is a dedicated Machine Learning enthusiast and experienced educator. She focuses on making ML accessible and understandable, helping learners build strong foundational knowledge and practical skills. Her expertise spans various machine learning algorithms and applications, and she is committed to fostering a supportive learning environment.</p>
+          <p>LinkedIn: <a href="https://www.linkedin.com/in/rhajou/" class="external" target="_blank">linkedin.com/in/rhajou</a></p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -61,27 +201,46 @@
 
         <!-- AI Literacy for Managers -->
         <div class="card">
-          <h3>AI Literacy for Managers</h3>
-          <p>✔ 1×60-minute session introducing AI fundamentals, use cases & strategy.</p>
-          <p><strong>Price:</strong> 600 SAR</p>
+          <h3><span class="card-icon">💡</span>AI Literacy for Managers</h3>
+          <ul class="features">
+            <li>1×60-minute session introducing AI fundamentals, use cases & strategy.</li>
+          </ul>
+          <div class="price-section">
+            <span class="price-value">600</span> SAR
+          </div>
+          <button class="cta-button">Choose Plan</button>
         </div>
 
         <!-- Python Uplifting -->
         <div class="card">
-          <h3>Python Uplifting</h3>
-          <p>✔ 4×60-minute sessions covering Python basics → data structures → libraries (NumPy, Pandas) → mini‐project.</p>
-          <p><strong>Price:</strong> 1,800 SAR</p>
+          <div class="badge">Recommended</div>
+          <h3><span class="card-icon">🐍</span>Python Uplifting</h3>
+          <ul class="features">
+            <li>4×60-minute sessions covering Python basics.</li>
+            <li>Data structures and algorithms.</li>
+            <li>Key libraries (NumPy, Pandas).</li>
+            <li>Hands-on mini‐project.</li>
+          </ul>
+          <div class="price-section">
+            <span class="price-value">1,800</span> SAR
+          </div>
+          <button class="cta-button">Choose Plan</button>
         </div>
 
         <!-- Machine Learning Uplifting -->
         <div class="card">
-          <h3>Machine Learning Uplifting</h3>
-          <p>✔ Session 1 (Intro): AI & ML overview → workflow & tools.</p>
-          <p>✔ Track A: Text Analytics (NLP fundamentals, transformers, sentiment analysis).</p>
-          <p>✔ Track B: Computer Vision (image preprocessing, CNNs, transfer learning).</p>
-          <p>✔ Track C: Predictive Analytics (regression, classification, model evaluation).</p>
-          <p>(Total 4×60-minute sessions)</p>
-          <p><strong>Price:</strong> 2,400 SAR</p>
+          <h3><span class="card-icon">🤖</span>Machine Learning Uplifting</h3>
+          <ul class="features">
+            <li>Session 1 (Intro): AI & ML overview, workflow & tools.</li>
+            <li>Track A: Text Analytics (NLP fundamentals, transformers, sentiment analysis).</li>
+            <li>Track B: Computer Vision (image preprocessing, CNNs, transfer learning).</li>
+            <li>Track C: Predictive Analytics (regression, classification, model evaluation).</li>
+            <li>Total 4×60-minute sessions.</li>
+          </ul>
+          <div class="price-section">
+            <span class="price-value">2,400</span> SAR
+          </div>
+          <button class="cta-button">Choose Plan</button>
         </div>
 
       </div>
@@ -102,5 +261,23 @@
     &copy; 2025 AI Tutoring Riyadh. All Rights Reserved.
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const packageCards = document.querySelectorAll('#packages .card');
+
+      packageCards.forEach(card => {
+        card.addEventListener('click', function() {
+          // Remove 'selected' class from all other cards
+          packageCards.forEach(c => {
+            if (c !== this) {
+              c.classList.remove('selected');
+            }
+          });
+          // Toggle 'selected' class on the clicked card (or simply add if you want one always selected after first click)
+          this.classList.toggle('selected'); // Allows selecting and deselecting by clicking the same card
+        });
+      });
+    });
+  </script>
 </body>
 </html>
