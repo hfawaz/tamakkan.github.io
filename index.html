@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>AI Tutoring in Riyadh</title>
+  <title data-translate-key="pageTitle">AI Tutoring in Riyadh</title>
+  <link rel="icon" href="logo.png" type="image/png"> <!-- Add this line for the favicon -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet"> <!-- Added Tajawal for Arabic -->
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Removed Emoji fonts for cleaner text */
@@ -14,8 +16,8 @@
       line-height: 1.6; /* Improved readability */
     }
     header { /* Updated header background */
-      background: #0056b3; /* A darker shade of blue for the header background */
-      color:#fff;
+      background: #F5F5F5; /* Greyish white background */
+      color:#333; /* Dark text for beige background */
       padding:1rem 0;
       border-bottom: 1px solid #dee2e6; /* Subtle border */
       /* text-align:center; Removed, using flex for layout */
@@ -28,14 +30,31 @@
       margin: 0 auto;
       padding: 0 1rem;
     }
+    .brand-logo img {
+      height: 40px; /* Adjust as needed */
+      margin-right: 0.5rem; /* Space between logo and text, if text is visible */
+      vertical-align: middle; /* Aligns image nicely with text */
+    }
     .brand-logo {
       font-size: 1.5em;
       font-weight: bold;
-      color: #e9ecef; /* Light color for brand logo on blue background */
+      color: #333; /* Dark color for brand logo on beige background */
       text-decoration: none;
+      display: flex; /* For aligning image and text */
+      align-items: center; /* Vertically center items in the flex container */
+    }
+    .lang-toggle-button {
+      background-color: transparent;
+      color: #333; /* Dark text for beige background */
+      border: 1px solid #DCDCDC; /* Light grey border */
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-left: 1rem; /* Space from nav links */
     }
     nav a {
-      color: #e9ecef; /* Light color for nav links on blue background */
+      color: #333; /* Dark color for nav links on beige background */
       margin:0 0.5rem;
       text-decoration:none;
       font-weight:500; /* Medium weight */
@@ -44,8 +63,8 @@
       transition: color 0.2s ease, background-color 0.2s ease;
     }
     nav a:hover, nav a:focus { /* Style for hover and keyboard focus */
-      color: #fff;           /* White on hover */
-      background-color: #004085; /* Slightly darker blue on hover for nav links */
+      color: #000;           /* Black on hover for better contrast */
+      background-color: #E8E8E8; /* Slightly darker greyish white on hover */
       outline: none;             /* Optional: remove default focus outline if custom style is clear */
     }
     .container { max-width:960px; margin:2rem auto; padding:0 1rem; }
@@ -476,6 +495,85 @@
         .contact-form .form-group .label-spacer { display: none; }
       */
     }
+
+    /* RTL STYLES */
+    html[dir="rtl"] body {
+      font-family: "Tajawal", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Arabic font first */
+    }
+    html[dir="rtl"] .header-content {
+      /* Order of logo and nav might need to be reversed if nav is first visually in LTR */
+      /* For space-between, it might be fine, or use flex-direction: row-reverse; */
+    }
+    html[dir="rtl"] .brand-logo {
+      /* If logo has specific margin related to direction */
+    }
+    html[dir="rtl"] .lang-toggle-button {
+      margin-left: 0;
+      margin-right: 1rem;
+    }
+    html[dir="rtl"] nav a {
+      margin:0 0.5rem 0 0; /* Reversed margins */
+    }
+    html[dir="rtl"] .hero h1, html[dir="rtl"] .hero p, html[dir="rtl"] .section h2 {
+      /* text-align: right; is handled by body's direction, but can be overridden if needed */
+    }
+    html[dir="rtl"] .card .features li::before {
+      margin-right: 0;
+      margin-left: 0.75em;
+    }
+    html[dir="rtl"] .card .price-currency {
+      margin-left: 0;
+      margin-right: 0.25em;
+    }
+    html[dir="rtl"] .card .integrated-achievements ul li::before {
+      margin-right: 0;
+      margin-left: 0.75em;
+    }
+    html[dir="rtl"] .bio-entry {
+      /* flex-direction: row-reverse; /* Image on right, text on left */
+      /* The gap property handles spacing correctly in both directions */
+    }
+    html[dir="rtl"] .bio-entry img {
+      /* margin-left: 1.5rem; margin-right: 0; /* If gap wasn't used */
+    }
+    html[dir="rtl"] a.external, html[dir="rtl"] #contact p a {
+      /* Link styles are generally fine */
+    }
+
+    /* Contact Form RTL */
+    html[dir="rtl"] .contact-form .form-row {
+      /* flex-direction: row-reverse; /* If order of fields in a row needs to change */
+    }
+    html[dir="rtl"] .contact-form label {
+      padding-right: 0;
+      padding-left: 0.75rem;
+      text-align: left; /* Labels align to the left, inputs to their right */
+    }
+    html[dir="rtl"] .contact-form input,
+    html[dir="rtl"] .contact-form select,
+    html[dir="rtl"] .contact-form textarea {
+      text-align: right; /* Input text starts from the right */
+    }
+    html[dir="rtl"] .contact-form input::placeholder,
+    html[dir="rtl"] .contact-form textarea::placeholder {
+      text-align: right; /* Placeholder text starts from the right */
+    }
+
+    /* Responsive RTL adjustments */
+    @media (max-width: 768px) {
+      html[dir="rtl"] .contact-form .form-group label {
+        text-align: right; /* Labels back to right align on mobile when stacked */
+      }
+    }
+    @media (max-width: 600px) {
+      html[dir="rtl"] .header-content {
+        /* flex-direction: column; is already set, align-items: center; */
+      }
+      html[dir="rtl"] nav a {
+        margin: 0.4rem 0.2rem; /* Symmetrical margin, fine for RTL */
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -483,11 +581,15 @@
   <!-- Header + Navigation -->
   <header>
     <div class="header-content">
-      <a href="#tamakkan" class="brand-logo">Tamakkan.ai</a>
+      <a href="#tamakkan" class="brand-logo">
+        <img src="logo.png" alt="Tamakkan.ai Logo">
+        <span data-translate-key="brandLogo">Tamakkan.ai</span>
+      </a>
       <nav>
-        <a href="#about">About</a>
-        <a href="#packages">Packages</a>
-        <a href="#contact">Contact</a>
+        <a href="#about" data-translate-key="navAbout">About</a>
+        <a href="#packages" data-translate-key="navPackages">Packages</a>
+        <a href="#contact" data-translate-key="navContact">Contact</a>
+        <button id="lang-toggle" class="lang-toggle-button" data-translate-key="languageSwitcher">العربية</button>
       </nav>
     </div>
   </header>
@@ -495,27 +597,26 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <h1>AI & Python Tutoring in Riyadh</h1>
-      <p>Hands-on sessions for professionals, managers &amp; aspiring data scientists.</p>
-      <a href="#packages" class="cta-button">View Our Packages</a>
+      <h1 data-translate-key="heroTitle">AI & Python Tutoring in Riyadh</h1>
+      <p data-translate-key="heroSubtitle">Hands-on sessions for professionals, managers &amp; aspiring data scientists.</p>
+      <a href="#packages" class="cta-button" data-translate-key="heroCta">View Our Packages</a>
     </div>
   </section>
 
   <!-- Tamakkan.ai Introduction -->
   <section id="tamakkan" class="section">
     <div class="container">
-      <h2>About Tamakkan.ai</h2>
-      <p>
+      <h2 data-translate-key="tamakkanIntroTitle">About Tamakkan.ai</h2>
+      <p data-translate-key="tamakkanIntroP1">
         Tamakkan.ai is a visionary organization dedicated to empowering individuals and businesses in Riyadh and beyond through transformative AI education and resources. Our mission is to foster a deeper understanding of Artificial Intelligence and its applications, enabling people to harness the power of AI for innovation, growth, and societal advancement. We believe in making AI accessible to all, providing cutting-edge knowledge and practical skills to navigate the future of technology.
       </p>
-      <!-- You could add a logo or a link to Tamakkan.ai's website here if available -->
     </div>
   </section>
 
   <!-- About -->
   <section id="about" class="section">
     <div class="container">
-      <h2>About Us</h2>
+      <h2 data-translate-key="aboutUsTitle">About Us</h2>
       <div class="bio-entry">
         <img src="hassan.png" alt="Hassan Ismail Fawaz">
         <div>
@@ -523,7 +624,7 @@
           <p> 
             Hassan is an accomplished researcher and educator in Artificial Intelligence, holding a PhD from France with a specialization in Large Language Models (LLMs). His work often explores the frontiers of natural language processing, deep learning, and explainable AI. With a passion for demystifying complex AI concepts, Hassan is dedicated to empowering professionals and aspiring data scientists with the practical skills and theoretical understanding needed to innovate and excel in the rapidly evolving field of AI. He has contributed to several impactful projects and publications, aiming to bridge the gap between cutting-edge research and real-world applications.
           </p>
-          <p>Portfolio: <a href="https://hfawaz.github.io/" class="external" target="_blank">hfawaz.github.io</a></p>
+          <p><span data-translate-key="hassanPortfolio">Portfolio:</span> <a href="https://hfawaz.github.io/" class="external" target="_blank">hfawaz.github.io</a></p>
         </div>
       </div>
 
@@ -532,7 +633,7 @@
         <div>
           <h3>Rima Hajou, Master of Engineering</h3>
           <p>Rima holds a Master of Engineering degree from France and is a dedicated Machine Learning enthusiast and experienced educator. She focuses on making ML accessible and understandable, helping learners build strong foundational knowledge and practical skills. Her expertise spans various machine learning algorithms and applications, and she is committed to fostering a supportive learning environment.</p>
-          <p>LinkedIn: <a href="https://www.linkedin.com/in/rhajou/" class="external" target="_blank">linkedin.com/in/rhajou</a></p>
+          <p><span data-translate-key="rimaLinkedIn">LinkedIn:</span> <a href="https://www.linkedin.com/in/rhajou/" class="external" target="_blank">linkedin.com/in/rhajou</a></p>
         </div>
       </div>
     </div>
@@ -541,84 +642,81 @@
   <!-- Packages -->
   <section id="packages" class="section">
     <div class="container">
-      <h2>Our Packages</h2>
+      <h2 data-translate-key="packagesTitle">Our Packages</h2>
       <div class="cards">
 
         <!-- AI Literacy for Managers -->
         <div class="card">
           <span class="card-icon">🚀</span>
-          <h3>AI Literacy</h3>
+          <h3 data-translate-key="aiLiteracyTitle">AI Literacy</h3>
           <div class="price-section">
-            <span class="price-value">600</span> <span class="price-currency">SAR</span>
-            <div class="price-interval">per session</div>
+            <span class="price-value" data-translate-key="aiLiteracyPrice">600</span> <span class="price-currency" data-translate-key="aiLiteracyCurrency">SAR</span>
+            <div class="price-interval" data-translate-key="aiLiteracyInterval">per session</div>
           </div>
           <ul class="features">
-            <li>1×60-minute session introducing AI fundamentals, use cases & strategy.</li>
+            <li data-translate-key="aiLiteracyFeature1">1×60-minute session introducing AI fundamentals, use cases & strategy.</li>
           </ul>
           <div class="integrated-achievements">
-            <h4>What You'll Achieve</h4>
+            <h4 data-translate-key="aiLiteracyAchieveTitle">What You'll Achieve</h4>
             <ul>
-              <li>Understand core AI concepts.</li>
-              <li>Identify AI applications for your team.</li>
-              <li>Confidently discuss AI strategy.</li>
-              <li>Bridge tech and business objectives.</li>
+              <li data-translate-key="aiLiteracyAchieve1">Understand core AI concepts.</li>
+              <li data-translate-key="aiLiteracyAchieve2">Identify AI applications for your team.</li>
+              <li data-translate-key="aiLiteracyAchieve3">Confidently discuss AI strategy.</li>
+              <li data-translate-key="aiLiteracyAchieve4">Bridge tech and business objectives.</li>
             </ul>
           </div>
-          <button class="cta-button choose-plan-btn" data-package-value="ai-literacy" data-package-name="AI Literacy">Choose Plan</button>
+          <button class="cta-button choose-plan-btn" data-package-value="ai-literacy" data-package-name-key="aiLiteracyTitle" data-translate-key="choosePlan">Choose Plan</button>
         </div>
 
         <!-- Python Uplifting -->
         <div class="card popular"> <!-- Added 'popular' class -->
           <span class="card-icon">💻</span>
-          <div class="badge">Most Popular</div> <!-- Changed badge text -->
-          <h3>Python Uplifting</h3>
+          <div class="badge" data-translate-key="mostPopularBadge">Most Popular</div> <!-- Changed badge text -->
+          <h3 data-translate-key="pythonUpliftingTitle">Python Uplifting</h3>
           <div class="price-section">
-            <span class="price-value">1,800</span> <span class="price-currency">SAR</span>
-            <div class="price-interval">4 sessions</div>
+            <span class="price-value" data-translate-key="pythonUpliftingPrice">1,800</span> <span class="price-currency" data-translate-key="aiLiteracyCurrency">SAR</span> <!-- Re-use currency key -->
+            <div class="price-interval" data-translate-key="pythonUpliftingInterval">4 sessions</div>
           </div>
           <ul class="features">
-            <li>4×60-minute sessions covering Python basics.</li>
-            <li>Data structures and algorithms.</li>
-            <li>Key libraries (NumPy, Pandas).</li>
-            <li>Hands-on mini‐project.</li>
+            <li data-translate-key="pythonUpliftingFeature1">4×60-minute sessions covering Python basics.</li>
+            <li data-translate-key="pythonUpliftingFeature2">Data structures and algorithms.</li>
+            <li data-translate-key="pythonUpliftingFeature3">Key libraries (NumPy, Pandas).</li>
+            <li data-translate-key="pythonUpliftingFeature4">Hands-on mini‐project.</li>
           </ul>
           <div class="integrated-achievements">
-            <h4>What You'll Achieve</h4>
+            <h4 data-translate-key="pythonUpliftingAchieveTitle">What You'll Achieve</h4>
             <ul>
-              <li>Master Python fundamentals.</li>
-              <li>Utilize key data structures.</li>
-              <li>Work with NumPy & Pandas.</li>
-              <li>Complete a hands-on project.</li>
+              <li data-translate-key="pythonUpliftingAchieve1">Master Python fundamentals.</li>
+              <li data-translate-key="pythonUpliftingAchieve2">Utilize key data structures.</li>
+              <li data-translate-key="pythonUpliftingAchieve3">Work with NumPy & Pandas.</li>
+              <li data-translate-key="pythonUpliftingAchieve4">Complete a hands-on project.</li>
             </ul>
           </div>
-          <button class="cta-button choose-plan-btn" data-package-value="python-uplifting" data-package-name="Python Uplifting">Choose Plan</button>
+          <button class="cta-button choose-plan-btn" data-package-value="python-uplifting" data-package-name-key="pythonUpliftingTitle" data-translate-key="choosePlan">Choose Plan</button>
         </div>
 
         <!-- Machine Learning Uplifting -->
         <div class="card">
           <span class="card-icon">🧠</span>
-          <h3>Machine Learning</h3>
+          <h3 data-translate-key="mlUpliftingTitle">Machine Learning</h3>
           <div class="price-section">
-            <span class="price-value">2,400</span> <span class="price-currency">SAR</span>
-            <div class="price-interval">4 sessions</div>
+            <span class="price-value" data-translate-key="mlUpliftingPrice">2,400</span> <span class="price-currency" data-translate-key="aiLiteracyCurrency">SAR</span> <!-- Re-use currency key -->
+            <div class="price-interval" data-translate-key="mlUpliftingInterval">4 sessions</div>
           </div>
           <ul class="features">
-            <li>Session 1 (Intro): AI & ML overview, workflow & tools.</li>
-            <!-- <li>Track A: Text Analytics (NLP fundamentals, transformers, sentiment analysis).</li>
-            <li>Track B: Computer Vision (image preprocessing, CNNs, transfer learning).</li>
-            <li>Track C: Predictive Analytics (regression, classification, model evaluation).</li> -->
-            <li>Total 4×60-minute sessions.</li>
+            <li data-translate-key="mlUpliftingFeature1">Session 1 (Intro): AI & ML overview, workflow & tools.</li>
+            <li data-translate-key="mlUpliftingFeature2">Total 4×60-minute sessions.</li>
           </ul>
           <div class="integrated-achievements">
-            <h4>What You'll Achieve</h4>
+            <h4 data-translate-key="mlUpliftingAchieveTitle">What You'll Achieve</h4>
             <ul>
-              <li>Grasp the ML workflow.</li>
-              <li>Learn core ML concepts.</li>
-              <li>Gain insights in your chosen track (NLP, CV, or Predictive).</li>
-              <li>Apply models to real-world problems.</li>
+              <li data-translate-key="mlUpliftingAchieve1">Grasp the ML workflow.</li>
+              <li data-translate-key="mlUpliftingAchieve2">Learn core ML concepts.</li>
+              <li data-translate-key="mlUpliftingAchieve3">Gain insights in your chosen track (NLP, CV, or Predictive).</li>
+              <li data-translate-key="mlUpliftingAchieve4">Apply models to real-world problems.</li>
             </ul>
           </div>
-          <button class="cta-button choose-plan-btn" data-package-value="ml-uplifting" data-package-name="Machine Learning">Choose Plan</button>
+          <button class="cta-button choose-plan-btn" data-package-value="ml-uplifting" data-package-name-key="mlUpliftingTitle" data-translate-key="choosePlan">Choose Plan</button>
         </div>
       </div>
     </div>
@@ -627,7 +725,7 @@
   <!-- Contact -->
   <section id="contact" class="section">
     <div class="container">
-      <h2>Contact & Booking</h2>
+      <h2 data-translate-key="contactTitle">Contact & Booking</h2>
       <!-- 
         Replace YOUR_FORM_ID with the actual ID you get from Formspree.
         You will configure hassanismailfawaz@gmail.com as the recipient in your Formspree dashboard.
@@ -635,56 +733,262 @@
       <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" autocomplete="off">
         <div class="form-row">
           <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+            <label for="firstName" data-translate-key="formFirstNameLabel">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" data-translate-placeholder-key="formFirstNamePlaceholder" required>
           </div>
           <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            <label for="lastName" data-translate-key="formLastNameLabel">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" data-translate-placeholder-key="formLastNamePlaceholder" required>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email" data-translate-key="formEmailLabel">Email</label>
             <!-- 
               It's good practice to name your email input "email" or "_replyto" for Formspree
               so they can set the "Reply-To" header of the email they send you.
             -->
-            <input type="email" id="email" name="_replyto" placeholder="you@example.com" required>
+            <input type="email" id="email" name="_replyto" placeholder="you@example.com" data-translate-placeholder-key="formEmailPlaceholder" required>
           </div>
           <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="05XXXXXXXX (optional)">
+            <label for="phone" data-translate-key="formPhoneLabel">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="05XXXXXXXX (optional)" data-translate-placeholder-key="formPhonePlaceholder">
           </div>
         </div>
         <div class="form-group">
-          <label for="package">Package</label>
+          <label for="package" data-translate-key="formPackageLabel">Package</label>
           <select id="package" name="package" required>
-            <option value="">-- Select a Package --</option>
-            <option value="ai-literacy">AI Literacy</option>
-            <option value="python-uplifting">Python Uplifting</option>
-            <option value="ml-uplifting">Machine Learning</option>
+            <option value="" data-translate-key="formPackageOptionDefault">-- Select a Package --</option>
+            <option value="ai-literacy" data-translate-key="formPackageOptionAiLiteracy">AI Literacy</option>
+            <option value="python-uplifting" data-translate-key="formPackageOptionPython">Python Uplifting</option>
+            <option value="ml-uplifting" data-translate-key="formPackageOptionML">Machine Learning</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" placeholder="How can we help you?" required></textarea>
+          <label for="message" data-translate-key="formMessageLabel">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="How can we help you?" data-translate-placeholder-key="formMessagePlaceholder" required></textarea>
         </div>
         <!--
           The submit button is a direct child of the form.
           Spacing above it will be provided by the margin-bottom of the preceding .form-group (for "Message").
         -->
-        <button type="submit" class="cta-button">Submit</button>
+        <button type="submit" class="cta-button" data-translate-key="formSubmitButton">Submit</button>
       </form>
   </section>
 
   <!-- Footer -->
   <footer>
-    &copy; 2025 tamakkan.ai - All Rights Reserved.
+    <span data-translate-key="footerText">&copy; 2025 tamakkan.ai - All Rights Reserved.</span>
   </footer>
 
   <script>
+    const translations = {
+      en: {
+        pageTitle: "Tamakkan.ai - AI & Python Tutoring in Riyadh",
+        brandLogo: "Tamakkan.ai",
+        navAbout: "About",
+        navPackages: "Packages",
+        navContact: "Contact",
+        languageSwitcher: "العربية",
+        heroTitle: "AI & Python Tutoring in Riyadh",
+        heroSubtitle: "Hands-on sessions for professionals, managers &amp; aspiring data scientists.",
+        heroCta: "View Our Packages",
+        tamakkanIntroTitle: "About Tamakkan.ai",
+        tamakkanIntroP1: "Tamakkan.ai is a visionary organization dedicated to empowering individuals and businesses in Riyadh and beyond through transformative AI education and resources. Our mission is to foster a deeper understanding of Artificial Intelligence and its applications, enabling people to harness the power of AI for innovation, growth, and societal advancement. We believe in making AI accessible to all, providing cutting-edge knowledge and practical skills to navigate the future of technology.",
+        aboutUsTitle: "About Us",
+        hassanPortfolio: "Portfolio:",
+        rimaLinkedIn: "LinkedIn:",
+        packagesTitle: "Our Packages",
+        aiLiteracyTitle: "AI Literacy",
+        aiLiteracyPrice: "600",
+        aiLiteracyCurrency: "SAR",
+        aiLiteracyInterval: "per session",
+        aiLiteracyFeature1: "1×60-minute session introducing AI fundamentals, use cases & strategy.",
+        aiLiteracyAchieveTitle: "What You'll Achieve",
+        aiLiteracyAchieve1: "Understand core AI concepts.",
+        aiLiteracyAchieve2: "Identify AI applications for your team.",
+        aiLiteracyAchieve3: "Confidently discuss AI strategy.",
+        aiLiteracyAchieve4: "Bridge tech and business objectives.",
+        choosePlan: "Choose Plan",
+        mostPopularBadge: "Most Popular",
+        pythonUpliftingTitle: "Python Uplifting",
+        pythonUpliftingPrice: "1,800",
+        pythonUpliftingInterval: "4 sessions",
+        pythonUpliftingFeature1: "4×60-minute sessions covering Python basics.",
+        pythonUpliftingFeature2: "Data structures and algorithms.",
+        pythonUpliftingFeature3: "Key libraries (NumPy, Pandas).",
+        pythonUpliftingFeature4: "Hands-on mini‐project.",
+        pythonUpliftingAchieveTitle: "What You'll Achieve", // Same as AI Literacy for demo
+        pythonUpliftingAchieve1: "Master Python fundamentals.",
+        pythonUpliftingAchieve2: "Utilize key data structures.",
+        pythonUpliftingAchieve3: "Work with NumPy & Pandas.",
+        pythonUpliftingAchieve4: "Complete a hands-on project.",
+        mlUpliftingTitle: "Machine Learning",
+        mlUpliftingPrice: "2,400",
+        mlUpliftingInterval: "4 sessions", // Same as Python for demo
+        mlUpliftingFeature1: "Session 1 (Intro): AI & ML overview, workflow & tools.",
+        mlUpliftingFeature2: "Total 4×60-minute sessions.",
+        mlUpliftingAchieveTitle: "What You'll Achieve", // Same as AI Literacy for demo
+        mlUpliftingAchieve1: "Grasp the ML workflow.",
+        mlUpliftingAchieve2: "Learn core ML concepts.",
+        mlUpliftingAchieve3: "Gain insights in your chosen track (NLP, CV, or Predictive).",
+        mlUpliftingAchieve4: "Apply models to real-world problems.",
+        contactTitle: "Contact & Booking",
+        formFirstNameLabel: "First Name",
+        formFirstNamePlaceholder: "First Name",
+        formLastNameLabel: "Last Name",
+        formLastNamePlaceholder: "Last Name",
+        formEmailLabel: "Email",
+        formEmailPlaceholder: "you@example.com",
+        formPhoneLabel: "Phone",
+        formPhonePlaceholder: "05XXXXXXXX (optional)",
+        formPackageLabel: "Package",
+        formPackageOptionDefault: "-- Select a Package --",
+        formPackageOptionAiLiteracy: "AI Literacy",
+        formPackageOptionPython: "Python Uplifting",
+        formPackageOptionML: "Machine Learning",
+        formMessageLabel: "Message",
+        formMessagePlaceholder: "How can we help you?",
+        formSubmitButton: "Submit",
+        footerText: "&copy; 2025 tamakkan.ai - All Rights Reserved.",
+        prefillMessageTemplate: "Hello, I am interested in the \"{packageName}\" package. Please provide more details.",
+        whatsappInquiryTitle: "New Inquiry from Tamakkan.ai Website:",
+        whatsappFirstNameLabel: "First Name:",
+        whatsappLastNameLabel: "Last Name:",
+        whatsappEmailLabel: "Email:",
+        whatsappPhoneLabel: "Phone:",
+        whatsappPackageLabel: "Selected Package:",
+        whatsappMessageLabel: "Message:",
+      },
+      ar: {
+        pageTitle: " - تمكّن - دروس خصوصية في الذكاء الاصطناعي بالرياض",
+        brandLogo: "تمكّن.ai",
+        navAbout: "عنا",
+        navPackages: "الباقات",
+        navContact: "اتصل بنا",
+        languageSwitcher: "English",
+        heroTitle: "دروس خصوصية في الذكاء الاصطناعي وبايثون في الرياض",
+        heroSubtitle: "جلسات عملية للمحترفين والمديرين وعلماء البيانات الطموحين.",
+        heroCta: "اطلع على باقاتنا",
+        tamakkanIntroTitle: "عن تمكّن.ai",
+        tamakkanIntroP1: "تمكّن.ai هي منظمة ذات رؤية مكرسة لتمكين الأفراد والشركات في الرياض وخارجها من خلال التعليم والموارد التحويلية في مجال الذكاء الاصطناعي. مهمتنا هي تعزيز فهم أعمق للذكاء الاصطناعي وتطبيقاته، مما يمكّن الناس من تسخير قوة الذكاء الاصطناعي للابتكار والنمو والتقدم المجتمعي. نؤمن بجعل الذكاء الاصطناعي في متناول الجميع، وتوفير المعرفة المتطورة والمهارات العملية للتنقل في مستقبل التكنولوجيا.",
+        aboutUsTitle: "عنّا",
+        hassanPortfolio: "الملف الشخصي:",
+        rimaLinkedIn: "لينكد إن:",
+        packagesTitle: "باقاتنا",
+        aiLiteracyTitle: "محو أمية الذكاء الاصطناعي",
+        aiLiteracyPrice: "٦٠٠",
+        aiLiteracyCurrency: "ريال سعودي",
+        aiLiteracyInterval: "لكل جلسة",
+        aiLiteracyFeature1: "جلسة واحدة × ٦٠ دقيقة لتقديم أساسيات الذكاء الاصطناعي، حالات الاستخدام والاستراتيجية.",
+        aiLiteracyAchieveTitle: "ماذا ستحقق",
+        aiLiteracyAchieve1: "فهم مفاهيم الذكاء الاصطناعي الأساسية.",
+        aiLiteracyAchieve2: "تحديد تطبيقات الذكاء الاصطناعي لفريقك.",
+        aiLiteracyAchieve3: "مناقشة استراتيجية الذكاء الاصطناعي بثقة.",
+        aiLiteracyAchieve4: "ربط الأهداف التقنية والتجارية.",
+        choosePlan: "اختر الباقة",
+        mostPopularBadge: "الأكثر شيوعًا",
+        pythonUpliftingTitle: "تطوير مهارات بايثون",
+        pythonUpliftingPrice: "١٬٨٠٠",
+        pythonUpliftingInterval: "٤ جلسات",
+        pythonUpliftingFeature1: "٤ جلسات × ٦٠ دقيقة تغطي أساسيات بايثون.",
+        pythonUpliftingFeature2: "هياكل البيانات والخوارزميات.",
+        pythonUpliftingFeature3: "المكتبات الرئيسية (NumPy, Pandas).",
+        pythonUpliftingFeature4: "مشروع عملي مصغر.",
+        pythonUpliftingAchieveTitle: "ماذا ستحقق",
+        pythonUpliftingAchieve1: "إتقان أساسيات بايثون.",
+        pythonUpliftingAchieve2: "استخدام هياكل البيانات الرئيسية.",
+        pythonUpliftingAchieve3: "العمل مع NumPy و Pandas.",
+        pythonUpliftingAchieve4: "إكمال مشروع عملي.",
+        mlUpliftingTitle: "تعلم الآلة",
+        mlUpliftingPrice: "٢٬٤٠٠",
+        mlUpliftingInterval: "٤ جلسات",
+        mlUpliftingFeature1: "الجلسة ١ (مقدمة): نظرة عامة على الذكاء الاصطناعي وتعلم الآلة، سير العمل والأدوات.",
+        mlUpliftingFeature2: "إجمالي ٤ جلسات × ٦٠ دقيقة.",
+        mlUpliftingAchieveTitle: "ماذا ستحقق",
+        mlUpliftingAchieve1: "فهم سير عمل تعلم الآلة.",
+        mlUpliftingAchieve2: "تعلم مفاهيم تعلم الآلة الأساسية.",
+        mlUpliftingAchieve3: "اكتساب رؤى في المسار الذي اخترته (معالجة اللغات الطبيعية، رؤية الحاسوب، أو التحليلات التنبؤية).",
+        mlUpliftingAchieve4: "تطبيق النماذج على مشاكل العالم الحقيقي.",
+        contactTitle: "الاتصال والحجز",
+        formFirstNameLabel: "الاسم الأول",
+        formFirstNamePlaceholder: "الاسم الأول",
+        formLastNameLabel: "اسم العائلة",
+        formLastNamePlaceholder: "اسم العائلة",
+        formEmailLabel: "البريد الإلكتروني",
+        formEmailPlaceholder: "you@example.com",
+        formPhoneLabel: "الهاتف",
+        formPhonePlaceholder: "٠٥XXXXXXXX (اختياري)",
+        formPackageLabel: "الباقة",
+        formPackageOptionDefault: "-- اختر باقة --",
+        formPackageOptionAiLiteracy: "محو أمية الذكاء الاصطناعي",
+        formPackageOptionPython: "تطوير مهارات بايثون",
+        formPackageOptionML: "تعلم الآلة",
+        formMessageLabel: "الرسالة",
+        formMessagePlaceholder: "كيف يمكننا مساعدتك؟",
+        formSubmitButton: "إرسال",
+        footerText: "© ٢٠٢٥ تمكّن.ai - جميع الحقوق محفوظة.",
+        prefillMessageTemplate: "مرحبًا، أنا مهتم بباقة \"{packageName}\". يرجى تقديم المزيد من التفاصيل.",
+        whatsappInquiryTitle: "استفسار جديد من موقع تمكّن.ai:",
+        whatsappFirstNameLabel: "الاسم الأول:",
+        whatsappLastNameLabel: "اسم العائلة:",
+        whatsappEmailLabel: "البريد الإلكتروني:",
+        whatsappPhoneLabel: "الهاتف:",
+        whatsappPackageLabel: "الباقة المختارة:",
+        whatsappMessageLabel: "الرسالة:",
+      }
+    };
+
+    let currentLanguage = localStorage.getItem('language') || 'en';
+
+    function applyTranslations(lang) {
+      const langTranslations = translations[lang];
+      if (!langTranslations) return;
+
+      document.querySelectorAll('[data-translate-key]').forEach(el => {
+        const key = el.dataset.translateKey;
+        if (langTranslations[key]) {
+          // For elements that might contain HTML like &amp; or &copy;
+          if (key === 'heroSubtitle' || key === 'footerText') {
+            el.innerHTML = langTranslations[key];
+          } else {
+            el.textContent = langTranslations[key];
+          }
+        }
+      });
+
+      document.querySelectorAll('[data-translate-placeholder-key]').forEach(el => {
+        const key = el.dataset.translatePlaceholderKey;
+        if (langTranslations[key]) {
+          el.placeholder = langTranslations[key];
+        }
+      });
+
+      // Update HTML lang and dir
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+      // Update language toggle button text
+      const langToggleButton = document.getElementById('lang-toggle');
+      if (langToggleButton) {
+        langToggleButton.textContent = langTranslations.languageSwitcher;
+      }
+    }
+
+    function toggleLanguage() {
+      currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
+      localStorage.setItem('language', currentLanguage);
+      applyTranslations(currentLanguage);
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
+      applyTranslations(currentLanguage); // Apply translations on load
+
+      const langToggleButton = document.getElementById('lang-toggle');
+      if (langToggleButton) {
+        langToggleButton.addEventListener('click', toggleLanguage);
+      }
+
       const choosePlanButtons = document.querySelectorAll('.choose-plan-btn');
       const allCards = document.querySelectorAll('.card'); // Get all card elements
       const packageSelect = document.getElementById('package');
@@ -711,17 +1015,19 @@
             parentCard.classList.add('card-selected');
           }
 
-          const packageValue = this.dataset.packageValue;
-          const packageName = this.dataset.packageName;
+          const packageValue = this.dataset.packageValue; // e.g., "ai-literacy"
+          const packageNameKey = this.dataset.packageNameKey; // e.g., "aiLiteracyTitle"
+          const translatedPackageName = translations[currentLanguage][packageNameKey] || packageNameKey;
 
           // Set the package in the dropdown
           if (packageSelect) {
             packageSelect.value = packageValue;
           }
 
-          // Pre-fill the message
+          // Pre-fill the message using translated template and package name
           if (messageTextarea) {
-            messageTextarea.value = `Hello, I am interested in the "${packageName}" package. Please provide more details.`;
+            let prefillTemplate = translations[currentLanguage].prefillMessageTemplate;
+            messageTextarea.value = prefillTemplate.replace('{packageName}', translatedPackageName);
           }
 
           // Scroll to the contact form
@@ -749,23 +1055,25 @@
           const email = emailInput ? emailInput.value.trim() : '';
           const phone = phoneInput ? phoneInput.value.trim() : '';
           
-          let packageName = 'Not selected';
+          let selectedPackageText = translations[currentLanguage].formPackageOptionDefault; // Default if not found
           if (packageSelect && packageSelect.value) {
             const selectedOption = packageSelect.options[packageSelect.selectedIndex];
-            packageName = selectedOption ? selectedOption.text : 'Error retrieving package';
+            // The option text is now translated directly, so we can use it.
+            // Or, better, get it from the translation map based on its value.
+            const packageKey = "formPackageOption" + packageSelect.value.charAt(0).toUpperCase() + packageSelect.value.slice(1).replace(/-(\w)/g, (match, p1) => p1.toUpperCase());
+            selectedPackageText = translations[currentLanguage][packageKey] || selectedOption.text;
           }
           
           const userMessage = messageTextarea ? messageTextarea.value.trim() : '';
 
           // Construct the message for WhatsApp
-          // Using \n for newlines, which will be URL-encoded.
-          let plainMessage = `New Inquiry from Tamakkan.ai Website:\n\n`;
-          if (firstName) plainMessage += `First Name: ${firstName}\n`;
-          if (lastName) plainMessage += `Last Name: ${lastName}\n`;
-          if (email) plainMessage += `Email: ${email}\n`;
-          if (phone) plainMessage += `Phone: ${phone}\n`; // Phone is optional
-          plainMessage += `Selected Package: ${packageName}\n\n`;
-          plainMessage += `Message:\n${userMessage}`;
+          let plainMessage = `${translations[currentLanguage].whatsappInquiryTitle}\n\n`;
+          if (firstName) plainMessage += `${translations[currentLanguage].whatsappFirstNameLabel} ${firstName}\n`;
+          if (lastName) plainMessage += `${translations[currentLanguage].whatsappLastNameLabel} ${lastName}\n`;
+          if (email) plainMessage += `${translations[currentLanguage].whatsappEmailLabel} ${email}\n`;
+          if (phone) plainMessage += `${translations[currentLanguage].whatsappPhoneLabel} ${phone}\n`;
+          plainMessage += `${translations[currentLanguage].whatsappPackageLabel} ${selectedPackageText}\n\n`;
+          plainMessage += `${translations[currentLanguage].whatsappMessageLabel}\n${userMessage}`;
 
           const encodedMessage = encodeURIComponent(plainMessage);
           const whatsappNumber = "966500865623"; // WhatsApp number without '+' or other symbols
