@@ -6,54 +6,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Removed Emoji fonts for cleaner text */
       margin:0;
       padding:0;
-      color:#333;
+      color: #212529; /* Dark gray text for light background */
+      background-color: #f8f9fa; /* Light gray background */
       line-height: 1.6; /* Improved readability */
     }
-    header { background:#005f99; color:#fff; padding:1rem; text-align:center; }
-    nav a { color:#fff; margin:0 0.75rem; text-decoration:none; font-weight:bold; display: inline-block; padding: 0.5rem 0; }
-    .container { max-width:800px; margin:2rem auto; padding:0 1rem; }
-    .hero { text-align:center; padding:2rem 0; }
-    .hero h1 { margin:0.5rem 0; }
-    .section { margin-bottom:2rem; }
-    .cards { display:flex; flex-wrap:wrap; gap:1rem; }
+    header {
+      background:#fff; /* White background for header */
+      color:#fff;
+      padding:1rem 0;
+      border-bottom: 1px solid #dee2e6; /* Subtle border */
+      /* text-align:center; Removed, using flex for layout */
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 960px; /* Consistent with container */
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .brand-logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #007bff; /* Primary blue */
+      text-decoration: none;
+    }
+    nav a {
+      color:#007bff; /* Primary blue for nav links */
+      margin:0 0.5rem; /* Adjust margin between links */
+      text-decoration:none;
+      font-weight:500; /* Medium weight */
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      transition: color 0.2s ease, background-color 0.2s ease;
+    }
+    nav a:hover, nav a:focus { /* Style for hover and keyboard focus */
+      color: #0056b3;           /* Darker blue on hover */
+      background-color: #e9ecef; /* Light background on hover */
+      outline: none;             /* Optional: remove default focus outline if custom style is clear */
+    }
+    .container { max-width:960px; margin:2rem auto; padding:0 1rem; }
+    .hero {
+      text-align:center;
+      padding:3rem 1rem; /* Increased padding */
+      background-color: #fff; /* White background for hero */
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      margin:0.5rem 0 1rem 0;
+      font-size: 2.8em;
+      color: #212529;
+    }
+    .hero p {
+      font-size: 1.2em;
+      color: #6c757d; /* Muted text color */
+      margin-bottom: 1.5rem;
+    }
+    .hero .cta-button { /* Specific styling for hero CTA if needed, or use general .cta-button */
+        background-color: #007bff;
+        color: white;
+        padding: 0.75rem 2rem;
+        font-size: 1.1em;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+    }
+    .hero .cta-button:hover {
+        background-color: #0056b3;
+    }
+    .section {
+      margin-bottom:2rem;
+    }
+    .section h2 {
+      color: #212529; /* Dark color for section titles */
+      text-align: center;
+      margin-bottom: 2.5rem; /* More space below title */
+      font-size: 2.2em;
+    }
+    .cards { display:flex; flex-wrap:wrap; gap:1.5rem; justify-content: center; }
     .card {
-      border:1px solid #ddd;
-      border-radius:12px; /* Slightly more rounded */
-      flex: 1 1 220px; /* Adjusted flex-basis to make cards slightly smaller */
-      min-width: 200px; /* Prevent cards from becoming too narrow before wrapping */
+      border:1px solid #dee2e6; /* Lighter border */
+      border-radius:8px; /* Standard border radius */
+      flex: 1 1 280px; /* Adjusted flex-basis for a three-card layout */
+      max-width: 320px; /* Max width for cards */
+      min-width: 260px;
       padding:1.5rem; /* More padding */
-      box-shadow:0 2px 4px rgba(0,0,0,0.1);
-      cursor: pointer; /* Indicate interactivity */
+      box-shadow:0 4px 12px rgba(0,0,0,0.08); /* Softer shadow */
       box-sizing: border-box; /* Ensures padding and border are included in the flex-basis */
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out; /* Smooth transitions */
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
       display: flex; /* For flex column layout */
       flex-direction: column; /* Arrange content vertically */
-      background-color: #fff; /* Explicit background */
+      background-color: #fff; /* Explicit white background for cards */
+      color: #333; /* Dark text color for content inside white cards */
       position: relative; /* For badge positioning */
     }
     .card:hover {
-      transform: translateY(-3px); /* Slight lift on hover */
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+      transform: translateY(-5px); /* Slight lift on hover */
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1); /* Enhanced shadow on hover */
     }
-    .card.selected {
-      border-color: #005f99;
-      box-shadow: 0 8px 16px rgba(0, 95, 153, 0.3); /* More prominent shadow */
-      transform: translateY(-5px); /* Lift selected card more */
-      background-color: #f0f8ff; /* Light blue background for selected */
+    .card.popular { /* Style for the "Most Popular" card */
+      border-top: 4px solid #007bff;
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.15);
     }
-    .card-icon {
-      display: inline-block;
-      margin-right: 0.5em;
+    .card h3 {
+      margin-top:0;
+      margin-bottom: 1rem; /* Space after title */
+      font-size: 1.4em; /* Larger title */
+      color: #212529;
+      text-align: center;
     }
-    .card h3 { margin-top:0; font-size: 1.25em; }
     .card .features {
       list-style: none;
       padding-left: 0;
-      margin: 1rem 0;
-      flex-grow: 1; /* Allows features to take up space, pushing price/button down */
+      margin-top: 1rem;
+      margin-bottom: 1rem; /* Adjusted space */
+      color: #495057; /* Slightly lighter text for features */
     }
     .card .features li {
       display: flex;
@@ -63,39 +133,130 @@
     }
     .card .features li::before {
       content: '✔';
-      color: #28a745; /* Green checkmark */
+      color: #007bff; /* Blue checkmark */
       margin-right: 0.75em;
       font-weight: bold;
     }
     .card .price-section {
-      margin: 1rem 0;
-      text-align: left; /* Align to left, or center if preferred */
+      margin-bottom: 1rem; /* Space after price */
+      text-align: center;
     }
     .card .price-value {
-      font-size: 2em;
+      font-size: 2.5em; /* Larger price */
       font-weight: bold;
-      color: #005f99;
+      color: #212529; /* Dark price */
+      display: inline; /* Keep currency on same line */
+    }
+    .card .price-currency {
+      font-size: 1em; /* Smaller currency */
+      color: #6c757d;
+      margin-left: 0.25em;
+    }
+    .card .price-interval {
+      display: block;
+      font-size: 0.9em;
+      color: #6c757d; /* Muted text */
+      margin-top: 0.25rem;
     }
     .card .cta-button {
-      display: block; width: 100%; padding: 0.75rem 1rem; background-color:#005f99; color:white; border:none; border-radius:6px; text-align:center; text-decoration:none; font-size:1em; cursor:pointer; margin-top:auto; /* Pushes button to bottom */
-      transition: background-color 0.2s ease-in-out;
+      display: block; width: 100%;
+      padding: 0.75rem 1.5rem;
+      background-color:#fff;
+      color:#007bff;
+      border: 1px solid #007bff;
+      border-radius:50px; /* Pill shape */
+      text-align:center; text-decoration:none; font-size:1em; font-weight: bold;
+      cursor:pointer; margin-top:auto; /* Pushes button to bottom */
+      transition: all 0.2s ease-in-out;
     }
-    .card:hover .cta-button { background-color: #004c80; }
-    .card.selected .cta-button { background-color: #28a745; /* Green for selected plan button */ }
+    .card .cta-button:hover {
+      background-color: #007bff;
+      color: white;
+    }
+    .card.popular .cta-button { /* Solid button for popular card */
+      background-color: #007bff;
+      color: white;
+    }
+    .card.popular .cta-button:hover {
+      background-color: #0056b3;
+    }
     .card .badge {
       position: absolute;
-      top: -12px; /* Position above the card */
-      right: 20px;
-      background-color: #ff9800; /* Orange badge */
+      top: -15px; /* Position above the card */
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #007bff; /* Blue badge */
       color: white;
       padding: 0.4em 0.8em;
       font-size: 0.85em;
-      border-radius: 4px;
+      border-radius: 15px; /* Rounded rectangle */
       font-weight: bold;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
-    footer { background:#f0f0f0; text-align:center; padding:1rem; font-size:0.9rem; }
-    a.external { color:#005f99; text-decoration:none; }
+    /* Styles for Integrated Achievements in Cards */
+    .card .integrated-achievements {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem; /* Adjusted bottom margin */
+      padding: 1rem; /* Padding inside the frame */
+      border: 1px solid #e0e0e0; /* Light border for the frame */
+      border-radius: 6px; /* Rounded corners for the frame */
+      background-color: #fdfdfd; /* Very light background for the frame, slightly off-white */
+      /* Removed hover-reveal styles: opacity, max-height, transform, transition */
+    }
+    /* 
+    .card:hover .integrated-achievements {
+      opacity: 1; 
+      max-height: 500px; 
+      transform: translateY(0); 
+    } 
+    }
+    .card .achievement-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.85rem;
+    }*/
+    .card .achievement-icon-inline {
+      font-size: 1.7em; /* Icon size */
+      margin-right: 0.6em;
+      color: #007bff; /* Primary blue, consistent with achievement icons */
+      line-height: 1; /* Helps align emoji/icons better */
+    }
+    .card .integrated-achievements h4 {
+      margin: 0;
+      font-size: 1.1em; /* Title for achievements section */
+      color: #212529;
+      font-weight: 600;
+    }
+    .card .integrated-achievements ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .card .integrated-achievements ul li {
+      display: flex;
+      align-items: flex-start; /* Good for multi-line items */
+      margin-bottom: 0.65em;
+      line-height: 1.5;
+      font-size: 0.9em; /* Slightly smaller text for list items */
+      color: #495057;
+    }
+    .card .integrated-achievements ul li::before {
+      content: '✓'; /* Checkmark icon */
+      color: #28a745; /* Green for success */
+      font-weight: bold;
+      margin-right: 0.75em;
+      flex-shrink: 0; /* Prevents checkmark from shrinking */
+    }
+    footer {
+      background:#e9ecef; /* Lighter footer background */
+      text-align:center;
+      padding:2rem 0; /* More padding */
+      font-size:0.9rem;
+      color: #6c757d; /* Muted text for footer */
+    }
+    /* Links directly on the navy background or in sections with navy background */
+    a.external, #contact p a { color:#007bff; text-decoration:none; } /* Standard link blue */
+    a.external:hover, #contact p a:hover { text-decoration:underline; color: #0056b3; } /* Darker blue on hover */
     .bio-entry {
       display: flex;
       align-items: flex-start; /* Align items to the top */
@@ -107,7 +268,10 @@
       height: 120px; /* Adjust as needed */
       border-radius: 50%; /* Circular image */
       object-fit: cover; /* Ensures image covers the area without distortion */
-      border: 3px solid #005f99; /* Optional: themed border */
+      border: 3px solid #dee2e6; /* Light gray border for images */
+    }
+    .bio-entry h3 {
+      color: #212529; /* Dark for bio headings */
     }
 
     /* Mobile Responsiveness */
@@ -115,6 +279,7 @@
       .hero h1 { font-size: 2em; }
       .hero p { font-size: 1em; }
       .card h3 { font-size: 1.15em; }
+      .card { flex-basis: 100%; max-width: none; } /* Cards stack on smaller screens */
       .card .price-value { font-size: 1.8em; }
     }
 
@@ -125,27 +290,31 @@
 
     @media (max-width: 600px) {
       header nav {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        /* display: flex; flex-direction: column; align-items: center; */
+        /* Handled by header-content flex-wrap or specific mobile nav pattern if needed */
       }
-      nav a { margin: 0.4rem 0; }
+      .header-content { flex-direction: column; align-items: center; }
+      .brand-logo { margin-bottom: 0.5rem; }
+      nav a { margin: 0.4rem 0.2rem; }
       .hero h1 { font-size: 1.8em; }
       .hero p { font-size: 0.95em; }
       /* Cards will naturally stack due to flex-basis and container width, no specific card width change needed here unless desired for them to be 100% strictly. */
     }
+
   </style>
 </head>
 <body>
 
   <!-- Header + Navigation -->
   <header>
-    <nav>
-      <a href="#tamkeen">Tamkeen</a>
-      <a href="#about">About</a>
-      <a href="#packages">Packages</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="header-content">
+      <a href="#tamakkan" class="brand-logo">Tamakkan.ai</a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#packages">Packages</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <!-- Hero -->
@@ -153,17 +322,18 @@
     <div class="container">
       <h1>AI & Python Tutoring in Riyadh</h1>
       <p>Hands-on sessions for professionals, managers & aspiring data scientists.</p>
+      <a href="#packages" class="cta-button">View Our Packages</a>
     </div>
   </section>
 
-  <!-- Tamkeen Introduction -->
-  <section id="tamkeen" class="section">
+  <!-- Tamakkan.ai Introduction -->
+  <section id="tamakkan" class="section">
     <div class="container">
-      <h2>About Tamkeen</h2>
+      <h2>About Tamakkan.ai</h2>
       <p>
-        Tamkeen is a visionary organization dedicated to empowering individuals and businesses in Riyadh and beyond through transformative AI education and resources. Our mission is to foster a deeper understanding of Artificial Intelligence and its applications, enabling people to harness the power of AI for innovation, growth, and societal advancement. We believe in making AI accessible to all, providing cutting-edge knowledge and practical skills to navigate the future of technology.
+        Tamakkan.ai is a visionary organization dedicated to empowering individuals and businesses in Riyadh and beyond through transformative AI education and resources. Our mission is to foster a deeper understanding of Artificial Intelligence and its applications, enabling people to harness the power of AI for innovation, growth, and societal advancement. We believe in making AI accessible to all, providing cutting-edge knowledge and practical skills to navigate the future of technology.
       </p>
-      <!-- You could add a logo or a link to Tamkeen's website here if available -->
+      <!-- You could add a logo or a link to Tamakkan.ai's website here if available -->
     </div>
   </section>
 
@@ -201,48 +371,87 @@
 
         <!-- AI Literacy for Managers -->
         <div class="card">
-          <h3><span class="card-icon">💡</span>AI Literacy for Managers</h3>
+          <h3>AI Literacy</h3>
+          <div class="price-section">
+            <span class="price-value">600</span> <span class="price-currency">SAR</span>
+            <div class="price-interval">per session</div>
+          </div>
           <ul class="features">
+            <li>Dedicated for AI Managers and Team Leads.</li>
             <li>1×60-minute session introducing AI fundamentals, use cases & strategy.</li>
           </ul>
-          <div class="price-section">
-            <span class="price-value">600</span> SAR
+          <div class="integrated-achievements">
+            <div class="achievement-header">
+              <span class="achievement-icon-inline">🚀</span>
+              <h4>What You'll Achieve</h4>
+            </div>
+            <ul>
+              <li>Understand core AI concepts.</li>
+              <li>Identify AI applications for your team.</li>
+              <li>Confidently discuss AI strategy.</li>
+              <li>Bridge tech and business objectives.</li>
+            </ul>
           </div>
           <button class="cta-button">Choose Plan</button>
         </div>
 
         <!-- Python Uplifting -->
-        <div class="card">
-          <div class="badge">Recommended</div>
-          <h3><span class="card-icon">🐍</span>Python Uplifting</h3>
+        <div class="card popular"> <!-- Added 'popular' class -->
+          <div class="badge">Most Popular</div> <!-- Changed badge text -->
+          <h3>Python Uplifting</h3>
+          <div class="price-section">
+            <span class="price-value">1,800</span> <span class="price-currency">SAR</span>
+            <div class="price-interval">4 sessions</div>
+          </div>
           <ul class="features">
             <li>4×60-minute sessions covering Python basics.</li>
             <li>Data structures and algorithms.</li>
             <li>Key libraries (NumPy, Pandas).</li>
             <li>Hands-on mini‐project.</li>
           </ul>
-          <div class="price-section">
-            <span class="price-value">1,800</span> SAR
+          <div class="integrated-achievements">
+            <div class="achievement-header">
+              <span class="achievement-icon-inline">💻</span>
+              <h4>What You'll Achieve</h4>
+            </div>
+            <ul>
+              <li>Master Python fundamentals.</li>
+              <li>Utilize key data structures.</li>
+              <li>Work with NumPy & Pandas.</li>
+              <li>Complete a hands-on project.</li>
+            </ul>
           </div>
           <button class="cta-button">Choose Plan</button>
         </div>
 
         <!-- Machine Learning Uplifting -->
         <div class="card">
-          <h3><span class="card-icon">🤖</span>Machine Learning Uplifting</h3>
+          <h3>Machine Learning Uplifting</h3>
+          <div class="price-section">
+            <span class="price-value">2,400</span> <span class="price-currency">SAR</span>
+            <div class="price-interval">4 sessions</div>
+          </div>
           <ul class="features">
             <li>Session 1 (Intro): AI & ML overview, workflow & tools.</li>
-            <li>Track A: Text Analytics (NLP fundamentals, transformers, sentiment analysis).</li>
+            <!-- <li>Track A: Text Analytics (NLP fundamentals, transformers, sentiment analysis).</li>
             <li>Track B: Computer Vision (image preprocessing, CNNs, transfer learning).</li>
-            <li>Track C: Predictive Analytics (regression, classification, model evaluation).</li>
+            <li>Track C: Predictive Analytics (regression, classification, model evaluation).</li> -->
             <li>Total 4×60-minute sessions.</li>
           </ul>
-          <div class="price-section">
-            <span class="price-value">2,400</span> SAR
+          <div class="integrated-achievements">
+            <div class="achievement-header">
+              <span class="achievement-icon-inline">🧠</span>
+              <h4>What You'll Achieve</h4>
+            </div>
+            <ul>
+              <li>Grasp the ML workflow.</li>
+              <li>Learn core ML concepts.</li>
+              <li>Gain insights in your chosen track (NLP, CV, or Predictive).</li>
+              <li>Apply models to real-world problems.</li>
+            </ul>
           </div>
           <button class="cta-button">Choose Plan</button>
         </div>
-
       </div>
     </div>
   </section>
@@ -258,26 +467,10 @@
 
   <!-- Footer -->
   <footer>
-    &copy; 2025 AI Tutoring Riyadh. All Rights Reserved.
+    &copy; 2025 tamakkan.ai - All Rights Reserved.
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const packageCards = document.querySelectorAll('#packages .card');
+  <!-- Removed JavaScript for card selection as per new design (static "Most Popular" highlight) -->
 
-      packageCards.forEach(card => {
-        card.addEventListener('click', function() {
-          // Remove 'selected' class from all other cards
-          packageCards.forEach(c => {
-            if (c !== this) {
-              c.classList.remove('selected');
-            }
-          });
-          // Toggle 'selected' class on the clicked card (or simply add if you want one always selected after first click)
-          this.classList.toggle('selected'); // Allows selecting and deselecting by clicking the same card
-        });
-      });
-    });
-  </script>
 </body>
 </html>
