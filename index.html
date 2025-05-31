@@ -13,8 +13,8 @@
       background-color: #f8f9fa; /* Light gray background */
       line-height: 1.6; /* Improved readability */
     }
-    header {
-      background:#fff; /* White background for header */
+    header { /* Updated header background */
+      background: #0056b3; /* A darker shade of blue for the header background */
       color:#fff;
       padding:1rem 0;
       border-bottom: 1px solid #dee2e6; /* Subtle border */
@@ -31,12 +31,12 @@
     .brand-logo {
       font-size: 1.5em;
       font-weight: bold;
-      color: #007bff; /* Primary blue */
+      color: #e9ecef; /* Light color for brand logo on blue background */
       text-decoration: none;
     }
     nav a {
-      color:#007bff; /* Primary blue for nav links */
-      margin:0 0.5rem; /* Adjust margin between links */
+      color: #e9ecef; /* Light color for nav links on blue background */
+      margin:0 0.5rem;
       text-decoration:none;
       font-weight:500; /* Medium weight */
       padding: 0.5rem 0.75rem;
@@ -44,26 +44,45 @@
       transition: color 0.2s ease, background-color 0.2s ease;
     }
     nav a:hover, nav a:focus { /* Style for hover and keyboard focus */
-      color: #0056b3;           /* Darker blue on hover */
-      background-color: #e9ecef; /* Light background on hover */
+      color: #fff;           /* White on hover */
+      background-color: #004085; /* Slightly darker blue on hover for nav links */
       outline: none;             /* Optional: remove default focus outline if custom style is clear */
     }
     .container { max-width:960px; margin:2rem auto; padding:0 1rem; }
     .hero {
       text-align:center;
-      padding:3rem 1rem; /* Increased padding */
-      background-color: #fff; /* White background for hero */
+      padding: 5rem 1rem; /* Increased padding for better image visibility */
+      /* background-color: #fff; /* Fallback, or remove if image is essential */
       margin-bottom: 2rem;
+      position: relative; /* Needed for the overlay */
+      background-image: url('background-header.jpg'); /* Replace with your image path */
+      background-size: cover;
+      background-position: center center;
+      color: #fff; /* Change text color to white for better contrast on an image */
     }
     .hero h1 {
       margin:0.5rem 0 1rem 0;
       font-size: 2.8em;
-      color: #212529;
+      color: #f8f9fa; /* Light color for hero h1, good contrast on dark blue image */
     }
     .hero p {
       font-size: 1.2em;
-      color: #6c757d; /* Muted text color */
+      color: #f8f9fa; /* Lighter text color for readability on an image */
       margin-bottom: 1.5rem;
+    }
+    .hero::before { /* Overlay for better text readability */
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* Dark semi-transparent overlay */
+      z-index: 1;
+    }
+    .hero .container { /* Ensure content is above the overlay */
+      position: relative;
+      z-index: 2;
     }
     .hero .cta-button { /* Specific styling for hero CTA if needed, or use general .cta-button */
         background-color: #007bff;
@@ -110,6 +129,11 @@
     .card.popular { /* Style for the "Most Popular" card */
       border-top: 4px solid #007bff;
       box-shadow: 0 8px 20px rgba(0, 123, 255, 0.15);
+    }
+    /* Style for the actively selected plan card */
+    .card.card-selected {
+      border: 2px solid #007bff; /* Primary blue, 2px thick */
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.2); /* Enhanced shadow for selection */
     }
     .card h3 {
       margin-top:0;
@@ -173,12 +197,15 @@
       background-color: #007bff;
       color: white;
     }
-    .card.popular .cta-button { /* Solid button for popular card */
+    /* Style for the actively selected plan button */
+    .card .cta-button.button-selected {
       background-color: #007bff;
       color: white;
+      border-color: #007bff; /* Ensure border matches */
     }
-    .card.popular .cta-button:hover {
-      background-color: #0056b3;
+    .card .cta-button.button-selected:hover {
+      background-color: #0056b3; /* Darker blue on hover, like popular */
+      color: white;
     }
     .card .badge {
       position: absolute;
@@ -209,20 +236,17 @@
       max-height: 500px; 
       transform: translateY(0); 
     } 
-    }
-    .card .achievement-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.85rem;
     }*/
-    .card .achievement-icon-inline {
-      font-size: 1.7em; /* Icon size */
-      margin-right: 0.6em;
+    .card .card-icon {
+      display: block; /* Takes full width, allowing text-align to work */
+      font-size: 3em; /* Make it large */
       color: #007bff; /* Primary blue, consistent with achievement icons */
-      line-height: 1; /* Helps align emoji/icons better */
+      text-align: center; /* Center the icon character */
+      margin-bottom: 1rem; /* Space below icon, before title */
+      line-height: 1; /* For better vertical alignment of the icon character */
     }
     .card .integrated-achievements h4 {
-      margin: 0;
+      margin: 0 0 0.75rem 0; /* Adjusted margin, especially bottom */
       font-size: 1.1em; /* Title for achievements section */
       color: #212529;
       font-weight: 600;
@@ -255,8 +279,8 @@
       color: #6c757d; /* Muted text for footer */
     }
     /* Links directly on the navy background or in sections with navy background */
-    a.external, #contact p a { color:#007bff; text-decoration:none; } /* Standard link blue */
-    a.external:hover, #contact p a:hover { text-decoration:underline; color: #0056b3; } /* Darker blue on hover */
+    a.external, #contact p a { color:#007bff; text-decoration:none; } /* Standard link blue for sections not in header */
+    a.external:hover, #contact p a:hover { text-decoration:underline; color: #0056b3; } /* Darker blue on hover for sections not in header */
     .bio-entry {
       display: flex;
       align-items: flex-start; /* Align items to the top */
@@ -301,6 +325,157 @@
       /* Cards will naturally stack due to flex-basis and container width, no specific card width change needed here unless desired for them to be 100% strictly. */
     }
 
+    /* Contact Form Styles */
+    .contact-form {
+      background-color: #fff;
+      padding: 2.5rem; /* Increased padding */
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07); /* Softer shadow */
+      margin-top: 1rem;
+      border: 1px solid #e9ecef; /* Subtle border */
+    }
+    .contact-form .form-row {
+      display: flex;
+      gap: 1.5rem; /* Space between form groups in the row */
+      margin-bottom: 1.25rem; /* Space below each row of fields */
+    }
+    .contact-form .form-group {
+      display: flex;
+      align-items: baseline; /* Aligns labels nicely with the baseline of text in inputs/textareas */
+      /* margin-bottom is handled by .form-row or by direct child .form-group below */
+    }
+
+    /* Form groups that are direct children of a form-row (i.e., the columns) */
+    .contact-form .form-row > .form-group {
+      flex: 1 1 0; /* Distribute space equally */
+      min-width: 280px; /* Increased min-width to ensure input fields have decent space */
+    }
+
+    /* Form groups that are direct children of the form (i.e., full-width fields and button group) */
+    .contact-form > .form-group {
+      margin-bottom: 1.25rem;
+    }
+    /*
+      Removed .contact-form > .form-group:last-child { margin-bottom: 0; }
+      The button is a direct child of the form, so the last form group (e.g., textarea)
+      should have its regular margin-bottom to create space before the button.
+    */
+    .contact-form label {
+      flex: 0 0 120px; /* Adjusted label width */
+      padding-right: 0.75rem; /* Reduced space between label and input field */
+      font-weight: 400; /* Normal font weight for labels, as in example */
+      color: #343a40; /* Slightly darker label color */
+      box-sizing: border-box;
+      text-align: right; /* Align label text to the right, closer to the input */
+    }
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.9rem 1rem; /* Increased padding */
+      border: 1px solid #ced4da; /* Standard border color */
+      border-radius: 6px; /* Slightly more rounded */
+      font-size: 1em;
+      color: #212529; /* Darker text for better contrast */
+      background-color: #fff; /* Ensure white background */
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      box-sizing: border-box; /* Ensures padding and border are included in the width */
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: #6c757d; /* Standard muted placeholder color */
+      opacity: 1; /* Firefox fix */
+    }
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      border-color: #007BFF; /* Brighter blue for focus */
+      outline: 0; /* Remove default outline */
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .30); /* Enhanced focus shadow */
+    }
+    /* .contact-form button {} /* General button style removed, using .cta-button */
+    .contact-form .cta-button { /* Specific styling for the submit button in the contact form */
+      display: block;
+      width: 100%;
+      background-color: #005FFF; /* Vibrant electric blue */
+      color: white;
+      padding: 0.9rem 2rem; /* Adjusted padding */
+      border: none;
+      border-radius: 50px;
+      font-size: 1.05em; /* Slightly larger font */
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 0; /* Rely on form-group margin for spacing */
+      letter-spacing: 0.5px; /* Subtle letter spacing */
+    }
+    .contact-form .cta-button:hover {
+      background-color: #004CCF; /* Darker shade of vibrant blue on hover */
+      transform: translateY(-1px); /* Slight lift on hover */
+      box-shadow: 0 6px 12px rgba(0, 95, 255, 0.35); /* Adjusted shadow for new vibrant blue */
+    }
+    .alternative-contact {
+      margin-top: 2.5rem; /* Space after the form */
+      padding: 1.5rem;
+      background-color: #e9ecef; /* Light gray, similar to footer */
+      border-radius: 8px; /* Consistent with card/form radius */
+      text-align: center;
+      color: #495057; /* Text color for this section */
+    }
+    .alternative-contact p {
+      margin-bottom: 0.75rem;
+      font-size: 1em;
+      line-height: 1.6;
+    }
+    .alternative-contact p:last-child {
+      margin-bottom: 0;
+    }
+    .alternative-contact a {
+      color: #007bff; /* Standard link blue */
+      text-decoration: none;
+      font-weight: 500; /* Slightly bolder */
+    }
+    .alternative-contact a:hover {
+      text-decoration: underline;
+      color: #0056b3; /* Darker blue on hover */
+    }
+
+    /* Responsive adjustments for the new form layout */
+    @media (max-width: 768px) { /* Adjust breakpoint as needed */
+      .contact-form .form-row {
+        flex-direction: column; /* Stack columns vertically */
+        gap: 0; /* Remove horizontal gap, vertical spacing handled by form-group margin */
+        margin-bottom: 0; /* Individual form-groups will now provide their own bottom margin */
+      }
+
+      .contact-form .form-group {
+        flex-direction: column; /* Stack label on top of input-wrapper */
+        align-items: stretch; /* Make label and input wrapper full width */
+        margin-bottom: 1rem; /* Consistent spacing for all form groups on mobile */
+      }
+      /*
+        Removed .contact-form > .form-group:last-child { margin-bottom: 0; } for mobile
+        The button is a direct child of the form, so the last form group (e.g., textarea)
+        should have its regular margin-bottom to create space before the button.
+      */
+
+      .contact-form .form-group label {
+        flex-basis: auto; /* Reset flex-basis */
+        width: 100%;
+        padding-right: 0;
+        margin-bottom: 0.5rem; /* Add margin below label when stacked */
+        text-align: left; /* Labels back to left align on mobile */
+      }
+      /*
+        The .label-spacer and .input-wrapper styles are not used in the current form HTML.
+        If they were intended for button alignment within a form-group,
+        the button is now a direct child of the form.
+        These rules can be removed if not used elsewhere.
+        .contact-form .form-group .label-spacer { display: none; }
+      */
+    }
   </style>
 </head>
 <body>
@@ -321,7 +496,7 @@
   <section class="hero">
     <div class="container">
       <h1>AI & Python Tutoring in Riyadh</h1>
-      <p>Hands-on sessions for professionals, managers & aspiring data scientists.</p>
+      <p>Hands-on sessions for professionals, managers &amp; aspiring data scientists.</p>
       <a href="#packages" class="cta-button">View Our Packages</a>
     </div>
   </section>
@@ -371,20 +546,17 @@
 
         <!-- AI Literacy for Managers -->
         <div class="card">
+          <span class="card-icon">🚀</span>
           <h3>AI Literacy</h3>
           <div class="price-section">
             <span class="price-value">600</span> <span class="price-currency">SAR</span>
             <div class="price-interval">per session</div>
           </div>
           <ul class="features">
-            <li>Dedicated for AI Managers and Team Leads.</li>
             <li>1×60-minute session introducing AI fundamentals, use cases & strategy.</li>
           </ul>
           <div class="integrated-achievements">
-            <div class="achievement-header">
-              <span class="achievement-icon-inline">🚀</span>
-              <h4>What You'll Achieve</h4>
-            </div>
+            <h4>What You'll Achieve</h4>
             <ul>
               <li>Understand core AI concepts.</li>
               <li>Identify AI applications for your team.</li>
@@ -392,11 +564,12 @@
               <li>Bridge tech and business objectives.</li>
             </ul>
           </div>
-          <button class="cta-button">Choose Plan</button>
+          <button class="cta-button choose-plan-btn" data-package-value="ai-literacy" data-package-name="AI Literacy">Choose Plan</button>
         </div>
 
         <!-- Python Uplifting -->
         <div class="card popular"> <!-- Added 'popular' class -->
+          <span class="card-icon">💻</span>
           <div class="badge">Most Popular</div> <!-- Changed badge text -->
           <h3>Python Uplifting</h3>
           <div class="price-section">
@@ -410,10 +583,7 @@
             <li>Hands-on mini‐project.</li>
           </ul>
           <div class="integrated-achievements">
-            <div class="achievement-header">
-              <span class="achievement-icon-inline">💻</span>
-              <h4>What You'll Achieve</h4>
-            </div>
+            <h4>What You'll Achieve</h4>
             <ul>
               <li>Master Python fundamentals.</li>
               <li>Utilize key data structures.</li>
@@ -421,12 +591,13 @@
               <li>Complete a hands-on project.</li>
             </ul>
           </div>
-          <button class="cta-button">Choose Plan</button>
+          <button class="cta-button choose-plan-btn" data-package-value="python-uplifting" data-package-name="Python Uplifting">Choose Plan</button>
         </div>
 
         <!-- Machine Learning Uplifting -->
         <div class="card">
-          <h3>Machine Learning Uplifting</h3>
+          <span class="card-icon">🧠</span>
+          <h3>Machine Learning</h3>
           <div class="price-section">
             <span class="price-value">2,400</span> <span class="price-currency">SAR</span>
             <div class="price-interval">4 sessions</div>
@@ -439,10 +610,7 @@
             <li>Total 4×60-minute sessions.</li>
           </ul>
           <div class="integrated-achievements">
-            <div class="achievement-header">
-              <span class="achievement-icon-inline">🧠</span>
-              <h4>What You'll Achieve</h4>
-            </div>
+            <h4>What You'll Achieve</h4>
             <ul>
               <li>Grasp the ML workflow.</li>
               <li>Learn core ML concepts.</li>
@@ -450,7 +618,7 @@
               <li>Apply models to real-world problems.</li>
             </ul>
           </div>
-          <button class="cta-button">Choose Plan</button>
+          <button class="cta-button choose-plan-btn" data-package-value="ml-uplifting" data-package-name="Machine Learning">Choose Plan</button>
         </div>
       </div>
     </div>
@@ -460,9 +628,54 @@
   <section id="contact" class="section">
     <div class="container">
       <h2>Contact & Booking</h2>
-      <p>To reserve a spot or ask questions, email: <a href="mailto:contact@hfawaz.com">contact@hfawaz.com</a></p>
-      <p>or visit: <a href="https://hfawaz.github.io/" class="external" target="_blank">hfawaz.github.io</a></p>
-    </div>
+      <!-- 
+        Replace YOUR_FORM_ID with the actual ID you get from Formspree.
+        You will configure hassanismailfawaz@gmail.com as the recipient in your Formspree dashboard.
+      -->
+      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" autocomplete="off">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <!-- 
+              It's good practice to name your email input "email" or "_replyto" for Formspree
+              so they can set the "Reply-To" header of the email they send you.
+            -->
+            <input type="email" id="email" name="_replyto" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="05XXXXXXXX (optional)">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="package">Package</label>
+          <select id="package" name="package" required>
+            <option value="">-- Select a Package --</option>
+            <option value="ai-literacy">AI Literacy</option>
+            <option value="python-uplifting">Python Uplifting</option>
+            <option value="ml-uplifting">Machine Learning</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="How can we help you?" required></textarea>
+        </div>
+        <!--
+          The submit button is a direct child of the form.
+          Spacing above it will be provided by the margin-bottom of the preceding .form-group (for "Message").
+        -->
+        <button type="submit" class="cta-button">Submit</button>
+      </form>
   </section>
 
   <!-- Footer -->
@@ -470,7 +683,99 @@
     &copy; 2025 tamakkan.ai - All Rights Reserved.
   </footer>
 
-  <!-- Removed JavaScript for card selection as per new design (static "Most Popular" highlight) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const choosePlanButtons = document.querySelectorAll('.choose-plan-btn');
+      const allCards = document.querySelectorAll('.card'); // Get all card elements
+      const packageSelect = document.getElementById('package');
+      const messageTextarea = document.getElementById('message');
+      const contactFormSection = document.getElementById('contact');
+
+      choosePlanButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove 'button-selected' class from all plan buttons
+          choosePlanButtons.forEach(btn => {
+            btn.classList.remove('button-selected');
+          });
+          // Add 'button-selected' class to the clicked button
+          this.classList.add('button-selected');
+
+          // --- Card Highlighting ---
+          // Remove 'card-selected' class from all cards
+          allCards.forEach(card => {
+            card.classList.remove('card-selected');
+          });
+          // Add 'card-selected' class to the parent card of the clicked button
+          const parentCard = this.closest('.card');
+          if (parentCard) {
+            parentCard.classList.add('card-selected');
+          }
+
+          const packageValue = this.dataset.packageValue;
+          const packageName = this.dataset.packageName;
+
+          // Set the package in the dropdown
+          if (packageSelect) {
+            packageSelect.value = packageValue;
+          }
+
+          // Pre-fill the message
+          if (messageTextarea) {
+            messageTextarea.value = `Hello, I am interested in the "${packageName}" package. Please provide more details.`;
+          }
+
+          // Scroll to the contact form
+          if (contactFormSection) {
+            contactFormSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Handle Contact Form Submission for WhatsApp
+      const contactForm = document.querySelector('.contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent default form submission
+
+          // Get form field values
+          const firstNameInput = document.getElementById('firstName');
+          const lastNameInput = document.getElementById('lastName');
+          const emailInput = document.getElementById('email'); // Corresponds to name="_replyto"
+          const phoneInput = document.getElementById('phone');
+          // packageSelect and messageTextarea are already defined above
+
+          const firstName = firstNameInput ? firstNameInput.value.trim() : '';
+          const lastName = lastNameInput ? lastNameInput.value.trim() : '';
+          const email = emailInput ? emailInput.value.trim() : '';
+          const phone = phoneInput ? phoneInput.value.trim() : '';
+          
+          let packageName = 'Not selected';
+          if (packageSelect && packageSelect.value) {
+            const selectedOption = packageSelect.options[packageSelect.selectedIndex];
+            packageName = selectedOption ? selectedOption.text : 'Error retrieving package';
+          }
+          
+          const userMessage = messageTextarea ? messageTextarea.value.trim() : '';
+
+          // Construct the message for WhatsApp
+          // Using \n for newlines, which will be URL-encoded.
+          let plainMessage = `New Inquiry from Tamakkan.ai Website:\n\n`;
+          if (firstName) plainMessage += `First Name: ${firstName}\n`;
+          if (lastName) plainMessage += `Last Name: ${lastName}\n`;
+          if (email) plainMessage += `Email: ${email}\n`;
+          if (phone) plainMessage += `Phone: ${phone}\n`; // Phone is optional
+          plainMessage += `Selected Package: ${packageName}\n\n`;
+          plainMessage += `Message:\n${userMessage}`;
+
+          const encodedMessage = encodeURIComponent(plainMessage);
+          const whatsappNumber = "966500865623"; // WhatsApp number without '+' or other symbols
+          const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+          window.open(whatsappURL, '_blank'); // Open WhatsApp in a new tab
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
